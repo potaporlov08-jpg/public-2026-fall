@@ -76,7 +76,8 @@ def parse_commit(blob: Blob) -> Commit:
     text = blob.content.decode('utf-8')
     parts = text.split('\n\n', 1)
     header = parts[0]
-    message = parts[1] if len(parts) > 1 else ''
+    # Исправление: убираем лишний перенос строки в конце сообщения
+    message = parts[1].rstrip('\n') if len(parts) > 1 else ''
     
     tree_hash = ''
     parents = []
